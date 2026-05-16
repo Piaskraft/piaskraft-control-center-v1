@@ -132,6 +132,14 @@ const pages = {
   <p>10–20 kg: 7.56 €</p>
   <p>20–31.5 kg: 7.81 €</p>
 </article>
+<article class="card">
+  <p class="card-label">Prowizje eBay</p>
+  <h3>Stawki per kategoria</h3>
+  <p>Narzędzia / Werkzeug: do konfiguracji</p>
+  <p>Motoryzacja / Auto: do konfiguracji</p>
+  <p>Akcesoria warsztatowe: do konfiguracji</p>
+  <p>Inna kategoria: do konfiguracji</p>
+</article>
   </section>
 `,
 
