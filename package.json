@@ -1,0 +1,15 @@
+{
+  "name": "piaskraft-control-center-v1",
+  "version": "1.0.0",
+  "description": "Piaskraft Control Center v1",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [],
+  "author": "Mateusz Piasecki",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^31.7.7"
+  }
+}
