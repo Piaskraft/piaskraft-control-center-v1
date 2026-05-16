@@ -28,10 +28,10 @@ const pages = {
       </article>
 
       <article class="card">
-        <p class="card-label">Produkty</p>
-        <h3>0</h3>
-        <p>Tu będą produkty do dodania na sklep i eBay.</p>
-      </article>
+  <p class="card-label">eBay Builder</p>
+  <h3>v1.0</h3>
+  <p>Moduł do analizy produktów Piaskraft pod sprzedaż na eBay.de.</p>
+</article>
 
       <article class="card">
         <p class="card-label">Szybkie linki</p>
@@ -95,24 +95,45 @@ const pages = {
     </section>
   `,
 
-  Produkty: () => `
-    <header class="topbar">
-      <div>
-        <p class="eyebrow">Magazyn pracy</p>
-        <h2>Produkty do ogarnięcia</h2>
-      </div>
+'eBay Builder': () => `
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Analiza eBay.de</p>
+      <h2>eBay Builder</h2>
+    </div>
 
-      <div class="version">Presta / eBay</div>
-    </header>
+    <div class="version">Piaskraft / eBay</div>
+  </header>
 
-    <section class="dashboard">
-      <article class="card card-priority">
-        <p class="card-label">Produkty</p>
-        <h3>Lista produktów do dodania</h3>
-        <p>Tutaj później dodamy pola: nazwa, EAN, cena zakupu, status i notatka.</p>
-      </article>
-    </section>
-  `,
+  <section class="dashboard">
+    <article class="card card-priority">
+      <p class="card-label">Nowa analiza</p>
+      <h3>Wklej link produktu z Piaskraft</h3>
+      <p>W tym module później dodamy analizę ceny, wysyłki, prowizji eBay i konkurencji.</p>
+    </article>
+
+    <article class="card">
+      <p class="card-label">Link produktu</p>
+      <h3>Produkt Piaskraft</h3>
+      <input
+        type="text"
+        class="task-input"
+        placeholder="https://www.piaskraft.com/..."
+      />
+    </article>
+
+   <article class="card">
+  <p class="card-label">Koszty wysyłki</p>
+  <h3>Tabela wagowa</h3>
+  <p>0–1 kg: 5.20 €</p>
+  <p>1–3 kg: 5.82 €</p>
+  <p>3–5 kg: 6.03 €</p>
+  <p>5–10 kg: 7.05 €</p>
+  <p>10–20 kg: 7.56 €</p>
+  <p>20–31.5 kg: 7.81 €</p>
+</article>
+  </section>
+`,
 
   Marketing: () => `
     <header class="topbar">
