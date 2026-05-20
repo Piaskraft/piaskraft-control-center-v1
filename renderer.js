@@ -140,6 +140,35 @@ const pages = {
   <p>Akcesoria warsztatowe: do konfiguracji</p>
   <p>Inna kategoria: do konfiguracji</p>
 </article>
+<article class="card">
+  <p class="card-label">Kalkulator ceny</p>
+  <h3>Podstawowe dane</h3>
+
+  <input
+    type="number"
+    class="task-input"
+    placeholder="Cena zakupu netto €"
+  />
+
+  <input
+    type="number"
+    class="task-input"
+    placeholder="Waga produktu kg"
+  />
+
+  <select class="task-input">
+    <option>Narzędzia / Werkzeug</option>
+    <option>Motoryzacja / Auto</option>
+    <option>Akcesoria warsztatowe</option>
+    <option>Inna kategoria</option>
+  </select>
+
+  <input
+    type="number"
+    class="task-input"
+    placeholder="Marża %"
+  />
+</article>
   </section>
 `,
 
