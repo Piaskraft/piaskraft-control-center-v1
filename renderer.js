@@ -177,7 +177,8 @@ const pages = {
 </button>
 
 <p id="shipping-result">Koszt wysyłki: —</p>
-<p id="price-result">Cena testowa bez prowizji eBay: —</p>
+<p id="fee-result">Prowizja eBay: —</p>
+<p id="price-result">Cena testowa z prowizją eBay: —</p>
 </article>
   </section>
 `,
@@ -408,23 +409,27 @@ function escapeHtml(text) {
     .replaceAll("'", '&#039;');
 }
 function setupEbayBuilderPage() {
-  const purchasePriceInput = document.querySelector('#ebay-purchase-price');
+const purchasePriceInput = document.querySelector('#ebay-purchase-price');
 const weightInput = document.querySelector('#ebay-weight');
+const categoryInput = document.querySelector('#ebay-category');
 const marginInput = document.querySelector('#ebay-margin');
 const calculateButton = document.querySelector('#calculate-shipping-button');
 const shippingResult = document.querySelector('#shipping-result');
+const feeResult = document.querySelector('#fee-result');
 const priceResult = document.querySelector('#price-result');
 
-  if (!purchasePriceInput || !weightInput || !marginInput || !calculateButton || !shippingResult || !priceResult) {
+  if (!purchasePriceInput || !weightInput || !categoryInput || !marginInput || !calculateButton || !shippingResult || !feeResult || !priceResult) {
   return;
 }
 
   calculateButton.addEventListener('click', () => {
-  const purchasePrice = Number(purchasePriceInput.value.replace(',', '.'));
-  const weight = Number(weightInput.value.replace(',', '.'));
-  const margin = Number(marginInput.value.replace(',', '.'));
+ const purchasePrice = Number(purchasePriceInput.value.replace(',', '.'));
+const weight = Number(weightInput.value.replace(',', '.'));
+const category = categoryInput.value;
+const margin = Number(marginInput.value.replace(',', '.'));
 
-  const shippingCost = getShippingCost(weight);
+const shippingCost = getShippingCost(weight);
+const ebayFeeRate = getEbayFeeRate(category);
 
   if (!shippingCost) {
     shippingResult.textContent = 'Koszt wysyłki: wpisz wagę od 0.01 do 31.5 kg';
@@ -443,13 +448,26 @@ const priceResult = document.querySelector('#price-result');
     return;
   }
 
-  const basePrice = purchasePrice + shippingCost;
-  const marginValue = basePrice * (margin / 100);
-  const finalPrice = basePrice + marginValue;
+ const basePrice = purchasePrice + shippingCost;
+const marginValue = basePrice * (margin / 100);
+const priceBeforeEbayFee = basePrice + marginValue;
+const finalPrice = priceBeforeEbayFee / (1 - ebayFeeRate / 100);
 
-  shippingResult.textContent = `Koszt wysyłki: ${shippingCost.toFixed(2)} €`;
-  priceResult.textContent = `Cena testowa bez prowizji eBay: ${finalPrice.toFixed(2)} €`;
+shippingResult.textContent = `Koszt wysyłki: ${shippingCost.toFixed(2)} €`;
+feeResult.textContent = `Prowizja eBay: ${ebayFeeRate}%`;
+priceResult.textContent = `Cena testowa z prowizją eBay: ${finalPrice.toFixed(2)} €`;
 });
+}
+
+function getEbayFeeRate(category) {
+  const ebayFeeRates = {
+    tools: 11,
+    auto: 10,
+    workshop: 12,
+    other: 13,
+  };
+
+  return ebayFeeRates[category] || ebayFeeRates.other;
 }
 
 function getShippingCost(weight) {
