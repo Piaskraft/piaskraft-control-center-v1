@@ -176,9 +176,12 @@ const pages = {
   Oblicz cenę eBay
 </button>
 
+<p id="purchase-result">Cena zakupu netto: —</p>
 <p id="shipping-result">Koszt wysyłki: —</p>
+<p id="base-result">Koszt bazowy: —</p>
+<p id="margin-result">Marża: —</p>
 <p id="fee-result">Prowizja eBay: —</p>
-<p id="price-result">Cena testowa z prowizją eBay: —</p>
+<p id="price-result">Cena eBay: —</p>
 </article>
   </section>
 `,
@@ -414,11 +417,14 @@ const weightInput = document.querySelector('#ebay-weight');
 const categoryInput = document.querySelector('#ebay-category');
 const marginInput = document.querySelector('#ebay-margin');
 const calculateButton = document.querySelector('#calculate-shipping-button');
+const purchaseResult = document.querySelector('#purchase-result');
 const shippingResult = document.querySelector('#shipping-result');
+const baseResult = document.querySelector('#base-result');
+const marginResult = document.querySelector('#margin-result');
 const feeResult = document.querySelector('#fee-result');
 const priceResult = document.querySelector('#price-result');
 
-  if (!purchasePriceInput || !weightInput || !categoryInput || !marginInput || !calculateButton || !shippingResult || !feeResult || !priceResult) {
+ if (!purchasePriceInput || !weightInput || !categoryInput || !marginInput || !calculateButton || !purchaseResult || !shippingResult || !baseResult || !marginResult || !feeResult || !priceResult) {
   return;
 }
 
@@ -448,14 +454,19 @@ const ebayFeeRate = getEbayFeeRate(category);
     return;
   }
 
- const basePrice = purchasePrice + shippingCost;
+
+
+const basePrice = purchasePrice + shippingCost;
 const marginValue = basePrice * (margin / 100);
 const priceBeforeEbayFee = basePrice + marginValue;
 const finalPrice = priceBeforeEbayFee / (1 - ebayFeeRate / 100);
 
+purchaseResult.textContent = `Cena zakupu netto: ${purchasePrice.toFixed(2)} €`;
 shippingResult.textContent = `Koszt wysyłki: ${shippingCost.toFixed(2)} €`;
+baseResult.textContent = `Koszt bazowy: ${basePrice.toFixed(2)} €`;
+marginResult.textContent = `Marża ${margin}%: ${marginValue.toFixed(2)} €`;
 feeResult.textContent = `Prowizja eBay: ${ebayFeeRate}%`;
-priceResult.textContent = `Cena testowa z prowizją eBay: ${finalPrice.toFixed(2)} €`;
+priceResult.textContent = `Cena eBay: ${finalPrice.toFixed(2)} €`;
 });
 }
 
