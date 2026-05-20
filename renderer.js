@@ -184,6 +184,7 @@ const pages = {
 <p id="shipping-result">Koszt wysyłki: —</p>
 <p id="base-result">Koszt bazowy: —</p>
 <p id="margin-result">Marża: —</p>
+<p id="category-result">Kategoria eBay: —</p>
 <p id="fee-result">Prowizja eBay: —</p>
 <p id="price-result">Sugerowana cena sprzedaży eBay: —</p>
 <p class="calculator-note">Darmowa wysyłka: koszt wysyłki jest wliczony w cenę.</p>
@@ -426,10 +427,11 @@ const purchaseResult = document.querySelector('#purchase-result');
 const shippingResult = document.querySelector('#shipping-result');
 const baseResult = document.querySelector('#base-result');
 const marginResult = document.querySelector('#margin-result');
+const categoryResult = document.querySelector('#category-result');
 const feeResult = document.querySelector('#fee-result');
 const priceResult = document.querySelector('#price-result');
 
- if (!purchasePriceInput || !weightInput || !categoryInput || !marginInput || !calculateButton || !purchaseResult || !shippingResult || !baseResult || !marginResult || !feeResult || !priceResult) {
+ if (!purchasePriceInput || !weightInput || !categoryInput || !marginInput || !calculateButton || !purchaseResult || !shippingResult || !baseResult || !marginResult || !categoryResult || !feeResult || !priceResult) {
   return;
 }
 
@@ -437,6 +439,7 @@ const priceResult = document.querySelector('#price-result');
  const purchasePrice = Number(purchasePriceInput.value.replace(',', '.'));
 const weight = Number(weightInput.value.replace(',', '.'));
 const category = categoryInput.value;
+const categoryLabel = categoryInput.options[categoryInput.selectedIndex].text;
 const margin = Number(marginInput.value.replace(',', '.'));
 
 const shippingCost = getShippingCost(weight);
@@ -470,6 +473,7 @@ purchaseResult.textContent = `Cena zakupu netto: ${purchasePrice.toFixed(2)} €
 shippingResult.textContent = `Koszt wysyłki: ${shippingCost.toFixed(2)} €`;
 baseResult.textContent = `Koszt bazowy: ${basePrice.toFixed(2)} €`;
 marginResult.textContent = `Marża ${margin}%: ${marginValue.toFixed(2)} €`;
+categoryResult.textContent = `Kategoria eBay: ${categoryLabel}`;
 feeResult.textContent = `Prowizja eBay: ${ebayFeeRate}%`;
 priceResult.textContent = `Sugerowana cena sprzedaży eBay: ${finalPrice.toFixed(2)} €`;
 });
