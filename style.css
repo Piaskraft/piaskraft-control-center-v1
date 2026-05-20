@@ -312,3 +312,8 @@ body {
   margin-top: 4px;
   margin-bottom: 16px;
 }
+.calculator-note {
+  margin-top: 8px;
+  color: #6b7280;
+  font-size: 14px;
+}

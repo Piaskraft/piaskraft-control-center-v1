@@ -181,7 +181,8 @@ const pages = {
 <p id="base-result">Koszt bazowy: —</p>
 <p id="margin-result">Marża: —</p>
 <p id="fee-result">Prowizja eBay: —</p>
-<p id="price-result">Cena eBay: —</p>
+<p id="price-result">Sugerowana cena sprzedaży eBay: —</p>
+<p class="calculator-note">Darmowa wysyłka: koszt wysyłki jest wliczony w cenę.</p>
 </article>
   </section>
 `,
@@ -439,7 +440,7 @@ const ebayFeeRate = getEbayFeeRate(category);
 
   if (!shippingCost) {
     shippingResult.textContent = 'Koszt wysyłki: wpisz wagę od 0.01 do 31.5 kg';
-    priceResult.textContent = 'Cena testowa bez prowizji eBay: —';
+    priceResult.textContent = `Sugerowana cena sprzedaży eBay: ${finalPrice.toFixed(2)} €`;
     return;
   }
 
@@ -466,7 +467,7 @@ shippingResult.textContent = `Koszt wysyłki: ${shippingCost.toFixed(2)} €`;
 baseResult.textContent = `Koszt bazowy: ${basePrice.toFixed(2)} €`;
 marginResult.textContent = `Marża ${margin}%: ${marginValue.toFixed(2)} €`;
 feeResult.textContent = `Prowizja eBay: ${ebayFeeRate}%`;
-priceResult.textContent = `Cena eBay: ${finalPrice.toFixed(2)} €`;
+priceResult.textContent = `Sugerowana cena sprzedaży eBay: ${finalPrice.toFixed(2)} €`;
 });
 }
 
