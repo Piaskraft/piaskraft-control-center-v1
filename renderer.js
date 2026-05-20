@@ -150,11 +150,12 @@ const pages = {
     placeholder="Cena zakupu netto €"
   />
 
-  <input
-    type="number"
-    class="task-input"
-    placeholder="Waga produktu kg"
-  />
+ <input
+  type="number"
+  class="task-input"
+  id="ebay-weight"
+  placeholder="Waga produktu kg"
+/>
 
   <select class="task-input">
     <option>Narzędzia / Werkzeug</option>
@@ -163,11 +164,17 @@ const pages = {
     <option>Inna kategoria</option>
   </select>
 
-  <input
-    type="number"
-    class="task-input"
-    placeholder="Marża %"
-  />
+ <input
+  type="number"
+  class="task-input"
+  placeholder="Marża %"
+/>
+
+<button type="button" class="task-button" id="calculate-shipping-button">
+  Oblicz wysyłkę
+</button>
+
+<p id="shipping-result">Koszt wysyłki: —</p>
 </article>
   </section>
 `,
@@ -243,6 +250,9 @@ function renderPage(pageName) {
   if (pageName === 'Zadania') {
     setupTasksPage();
   }
+  if (pageName === 'eBay Builder') {
+  setupEbayBuilderPage();
+}
 }
 
 function saveTasks() {
@@ -393,6 +403,55 @@ function escapeHtml(text) {
     .replaceAll('>', '&gt;')
     .replaceAll('"', '&quot;')
     .replaceAll("'", '&#039;');
+}
+function setupEbayBuilderPage() {
+  const weightInput = document.querySelector('#ebay-weight');
+  const calculateButton = document.querySelector('#calculate-shipping-button');
+  const shippingResult = document.querySelector('#shipping-result');
+
+  if (!weightInput || !calculateButton || !shippingResult) {
+    return;
+  }
+
+  calculateButton.addEventListener('click', () => {
+    const weight = Number(weightInput.value.replace(',', '.'));
+    const shippingCost = getShippingCost(weight);
+
+    if (!shippingCost) {
+      shippingResult.textContent = 'Koszt wysyłki: wpisz wagę od 0.01 do 31.5 kg';
+      return;
+    }
+
+    shippingResult.textContent = `Koszt wysyłki: ${shippingCost.toFixed(2)} €`;
+  });
+}
+
+function getShippingCost(weight) {
+  if (weight > 0 && weight <= 1) {
+    return 5.20;
+  }
+
+  if (weight > 1 && weight <= 3) {
+    return 5.82;
+  }
+
+  if (weight > 3 && weight <= 5) {
+    return 6.03;
+  }
+
+  if (weight > 5 && weight <= 10) {
+    return 7.05;
+  }
+
+  if (weight > 10 && weight <= 20) {
+    return 7.56;
+  }
+
+  if (weight > 20 && weight <= 31.5) {
+    return 7.81;
+  }
+
+  return null;
 }
 
 menuItems.forEach((item) => {
