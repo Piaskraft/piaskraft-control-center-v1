@@ -297,3 +297,18 @@ body {
   background: #16a34a !important;
   color: #ffffff !important;
 }
+.ebay-calculator-card .task-input {
+  margin-bottom: 14px;
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
+}
+
+.ebay-calculator-card .task-input:focus {
+  border-color: #ff6600;
+  box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.15);
+}
+
+.ebay-calculator-card .task-button {
+  margin-top: 4px;
+  margin-bottom: 16px;
+}

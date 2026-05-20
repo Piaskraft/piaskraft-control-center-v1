@@ -140,7 +140,7 @@ const pages = {
   <p>Akcesoria warsztatowe: do konfiguracji</p>
   <p>Inna kategoria: do konfiguracji</p>
 </article>
-<article class="card">
+<article class="card ebay-calculator-card">
   <p class="card-label">Kalkulator ceny</p>
   <h3>Podstawowe dane</h3>
 
