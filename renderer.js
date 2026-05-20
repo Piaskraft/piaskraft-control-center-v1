@@ -145,10 +145,11 @@ const pages = {
   <h3>Podstawowe dane</h3>
 
   <input
-    type="number"
-    class="task-input"
-    placeholder="Cena zakupu netto €"
-  />
+  type="number"
+  class="task-input"
+  id="ebay-purchase-price"
+  placeholder="Cena zakupu netto €"
+/>
 
  <input
   type="number"
@@ -157,16 +158,17 @@ const pages = {
   placeholder="Waga produktu kg"
 />
 
-  <select class="task-input">
-    <option>Narzędzia / Werkzeug</option>
-    <option>Motoryzacja / Auto</option>
-    <option>Akcesoria warsztatowe</option>
-    <option>Inna kategoria</option>
-  </select>
+<select class="task-input" id="ebay-category">
+  <option value="tools">Narzędzia / Werkzeug</option>
+  <option value="auto">Motoryzacja / Auto</option>
+  <option value="workshop">Akcesoria warsztatowe</option>
+  <option value="other">Inna kategoria</option>
+</select>
 
  <input
   type="number"
   class="task-input"
+  id="ebay-margin"
   placeholder="Marża %"
 />
 
