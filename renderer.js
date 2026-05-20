@@ -177,6 +177,7 @@ const pages = {
 </button>
 
 <p id="shipping-result">Koszt wysyłki: —</p>
+<p id="price-result">Cena testowa bez prowizji eBay: —</p>
 </article>
   </section>
 `,
@@ -407,25 +408,48 @@ function escapeHtml(text) {
     .replaceAll("'", '&#039;');
 }
 function setupEbayBuilderPage() {
-  const weightInput = document.querySelector('#ebay-weight');
-  const calculateButton = document.querySelector('#calculate-shipping-button');
-  const shippingResult = document.querySelector('#shipping-result');
+  const purchasePriceInput = document.querySelector('#ebay-purchase-price');
+const weightInput = document.querySelector('#ebay-weight');
+const marginInput = document.querySelector('#ebay-margin');
+const calculateButton = document.querySelector('#calculate-shipping-button');
+const shippingResult = document.querySelector('#shipping-result');
+const priceResult = document.querySelector('#price-result');
 
-  if (!weightInput || !calculateButton || !shippingResult) {
+  if (!purchasePriceInput || !weightInput || !marginInput || !calculateButton || !shippingResult || !priceResult) {
+  return;
+}
+
+  calculateButton.addEventListener('click', () => {
+  const purchasePrice = Number(purchasePriceInput.value.replace(',', '.'));
+  const weight = Number(weightInput.value.replace(',', '.'));
+  const margin = Number(marginInput.value.replace(',', '.'));
+
+  const shippingCost = getShippingCost(weight);
+
+  if (!shippingCost) {
+    shippingResult.textContent = 'Koszt wysyłki: wpisz wagę od 0.01 do 31.5 kg';
+    priceResult.textContent = 'Cena testowa bez prowizji eBay: —';
     return;
   }
 
-  calculateButton.addEventListener('click', () => {
-    const weight = Number(weightInput.value.replace(',', '.'));
-    const shippingCost = getShippingCost(weight);
-
-    if (!shippingCost) {
-      shippingResult.textContent = 'Koszt wysyłki: wpisz wagę od 0.01 do 31.5 kg';
-      return;
-    }
-
+  if (!purchasePrice || purchasePrice <= 0) {
     shippingResult.textContent = `Koszt wysyłki: ${shippingCost.toFixed(2)} €`;
-  });
+    priceResult.textContent = 'Cena testowa bez prowizji eBay: wpisz cenę zakupu';
+    return;
+  }
+
+  if (margin < 0) {
+    priceResult.textContent = 'Cena testowa bez prowizji eBay: marża nie może być ujemna';
+    return;
+  }
+
+  const basePrice = purchasePrice + shippingCost;
+  const marginValue = basePrice * (margin / 100);
+  const finalPrice = basePrice + marginValue;
+
+  shippingResult.textContent = `Koszt wysyłki: ${shippingCost.toFixed(2)} €`;
+  priceResult.textContent = `Cena testowa bez prowizji eBay: ${finalPrice.toFixed(2)} €`;
+});
 }
 
 function getShippingCost(weight) {
