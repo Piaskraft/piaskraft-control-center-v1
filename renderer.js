@@ -173,7 +173,7 @@ const pages = {
 />
 
 <button type="button" class="task-button" id="calculate-shipping-button">
-  Oblicz wysyłkę
+  Oblicz cenę eBay
 </button>
 
 <p id="shipping-result">Koszt wysyłki: —</p>
