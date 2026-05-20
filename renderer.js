@@ -135,10 +135,14 @@ const pages = {
 <article class="card">
   <p class="card-label">Prowizje eBay</p>
   <h3>Stawki per kategoria</h3>
-  <p>Narzędzia / Werkzeug: do konfiguracji</p>
-  <p>Motoryzacja / Auto: do konfiguracji</p>
-  <p>Akcesoria warsztatowe: do konfiguracji</p>
-  <p>Inna kategoria: do konfiguracji</p>
+  <p>Narzędzia / Werkzeug: 11% testowo</p>
+  <p>Motoryzacja / Auto: 10% testowo</p>
+  <p>Akcesoria warsztatowe: 12% testowo</p>
+  <p>Inna kategoria: 13% testowo</p>
+  <p class="calculator-note">
+    Uwaga: stawki prowizji eBay są testowe. Docelowo będą pobierane lub konfigurowane per kategoria.
+  </p>
+</article>
 </article>
 <article class="card ebay-calculator-card">
   <p class="card-label">Kalkulator ceny</p>
