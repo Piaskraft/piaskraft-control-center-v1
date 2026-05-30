@@ -28,10 +28,10 @@ const pages = {
       </article>
 
       <article class="card">
-  <p class="card-label">eBay Builder</p>
-  <h3>v1.0</h3>
-  <p>Moduł do analizy produktów Piaskraft pod sprzedaż na eBay.de.</p>
-</article>
+        <p class="card-label">eBay Builder</p>
+        <h3>v1.0</h3>
+        <p>Moduł do analizy produktów Piaskraft pod sprzedaż na eBay.de.</p>
+      </article>
 
       <article class="card">
         <p class="card-label">Szybkie linki</p>
@@ -63,24 +63,24 @@ const pages = {
             placeholder="Np. Dodać 3 produkty na eBay"
           />
 
-         <select class="task-category">
-  <option>Piaskraft</option>
-  <option>eBay</option>
-  <option>PrestaShop</option>
-  <option>Marketing</option>
-  <option>Katalog B2B</option>
-  <option>Nauka</option>
-  <option>Prywatne</option>
-</select>
+          <select class="task-category">
+            <option>Piaskraft</option>
+            <option>eBay</option>
+            <option>PrestaShop</option>
+            <option>Marketing</option>
+            <option>Katalog B2B</option>
+            <option>Nauka</option>
+            <option>Prywatne</option>
+          </select>
 
-<select class="task-priority">
-  <option>Dzisiaj</option>
-  <option>Wysoki</option>
-  <option>Średni</option>
-  <option>Niski</option>
-</select>
+          <select class="task-priority">
+            <option>Dzisiaj</option>
+            <option>Wysoki</option>
+            <option>Średni</option>
+            <option>Niski</option>
+          </select>
 
-<button type="submit" class="task-button">Dodaj zadanie</button>
+          <button type="submit" class="task-button">Dodaj zadanie</button>
         </form>
       </article>
 
@@ -95,103 +95,112 @@ const pages = {
     </section>
   `,
 
-'eBay Builder': () => `
-  <header class="topbar">
-    <div>
-      <p class="eyebrow">Analiza eBay.de</p>
-      <h2>eBay Builder</h2>
-    </div>
+  'eBay Builder': () => `
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Analiza eBay.de</p>
+        <h2>eBay Builder</h2>
+      </div>
 
-    <div class="version">Piaskraft / eBay</div>
-  </header>
+      <div class="version">Piaskraft / eBay</div>
+    </header>
 
-  <section class="dashboard">
-    <article class="card card-priority">
-      <p class="card-label">Nowa analiza</p>
-      <h3>Wklej link produktu z Piaskraft</h3>
-      <p>W tym module później dodamy analizę ceny, wysyłki, prowizji eBay i konkurencji.</p>
-    </article>
+    <section class="dashboard">
+      <article class="card card-priority">
+        <p class="card-label">Nowa analiza</p>
+        <h3>Wklej link produktu z Piaskraft</h3>
+        <p>W tym module później dodamy analizę ceny, wysyłki, prowizji eBay i konkurencji.</p>
+      </article>
 
-    <article class="card">
-      <p class="card-label">Link produktu</p>
-      <h3>Produkt Piaskraft</h3>
-      <input
-        type="text"
-        class="task-input"
-        placeholder="https://www.piaskraft.com/..."
-      />
-    </article>
+      <article class="card">
+        <p class="card-label">Link produktu</p>
+        <h3>Produkt Piaskraft</h3>
 
-   <article class="card">
-  <p class="card-label">Koszty wysyłki</p>
-  <h3>Tabela wagowa</h3>
-  <p>0–1 kg: 5.20 €</p>
-  <p>1–3 kg: 5.82 €</p>
-  <p>3–5 kg: 6.03 €</p>
-  <p>5–10 kg: 7.05 €</p>
-  <p>10–20 kg: 7.56 €</p>
-  <p>20–31.5 kg: 7.81 €</p>
-</article>
-<article class="card">
-  <p class="card-label">Prowizje eBay</p>
-  <h3>Stawki per kategoria</h3>
-  <p>Narzędzia / Werkzeug: 11% testowo</p>
-  <p>Motoryzacja / Auto: 10% testowo</p>
-  <p>Akcesoria warsztatowe: 12% testowo</p>
-  <p>Inna kategoria: 13% testowo</p>
-  <p class="calculator-note">
-    Uwaga: stawki prowizji eBay są testowe. Docelowo będą pobierane lub konfigurowane per kategoria.
-  </p>
-</article>
-</article>
-<article class="card ebay-calculator-card">
-  <p class="card-label">Kalkulator ceny</p>
-  <h3>Podstawowe dane</h3>
+        <input
+          type="text"
+          class="task-input"
+          id="product-link-input"
+          placeholder="https://www.piaskraft.com/..."
+        />
 
-  <input
-  type="number"
-  class="task-input"
-  id="ebay-purchase-price"
-  placeholder="Cena zakupu netto €"
-/>
+        <button type="button" class="task-button" id="analyze-product-button">
+          Analizuj produkt
+        </button>
 
- <input
-  type="number"
-  class="task-input"
-  id="ebay-weight"
-  placeholder="Waga produktu kg"
-/>
+        <p id="product-link-result">Status analizy: brak linku</p>
+      </article>
 
-<select class="task-input" id="ebay-category">
-  <option value="tools">Narzędzia / Werkzeug</option>
-  <option value="auto">Motoryzacja / Auto</option>
-  <option value="workshop">Akcesoria warsztatowe</option>
-  <option value="other">Inna kategoria</option>
-</select>
+      <article class="card">
+        <p class="card-label">Koszty wysyłki</p>
+        <h3>Tabela wagowa</h3>
+        <p>0–1 kg: 5.20 €</p>
+        <p>1–3 kg: 5.82 €</p>
+        <p>3–5 kg: 6.03 €</p>
+        <p>5–10 kg: 7.05 €</p>
+        <p>10–20 kg: 7.56 €</p>
+        <p>20–31.5 kg: 7.81 €</p>
+      </article>
 
- <input
-  type="number"
-  class="task-input"
-  id="ebay-margin"
-  placeholder="Marża %"
-/>
+      <article class="card">
+        <p class="card-label">Prowizje eBay</p>
+        <h3>Stawki per kategoria</h3>
+        <p>Narzędzia / Werkzeug: 11% testowo</p>
+        <p>Motoryzacja / Auto: 10% testowo</p>
+        <p>Akcesoria warsztatowe: 12% testowo</p>
+        <p>Inna kategoria: 13% testowo</p>
+        <p class="calculator-note">
+          Uwaga: stawki prowizji eBay są testowe. Docelowo będą pobierane lub konfigurowane per kategoria.
+        </p>
+      </article>
 
-<button type="button" class="task-button" id="calculate-shipping-button">
-  Oblicz cenę eBay
-</button>
+      <article class="card ebay-calculator-card">
+        <p class="card-label">Kalkulator ceny</p>
+        <h3>Podstawowe dane</h3>
 
-<p id="purchase-result">Cena zakupu netto: —</p>
-<p id="shipping-result">Koszt wysyłki: —</p>
-<p id="base-result">Koszt bazowy: —</p>
-<p id="margin-result">Marża: —</p>
-<p id="category-result">Kategoria eBay: —</p>
-<p id="fee-result">Prowizja eBay: —</p>
-<p id="price-result">Sugerowana cena sprzedaży eBay: —</p>
-<p id="rounded-price-result">Cena do wystawienia: —</p>
-<p class="calculator-note">Darmowa wysyłka: koszt wysyłki jest wliczony w cenę.</p>
-</article>
-  </section>
-`,
+        <input
+          type="number"
+          class="task-input"
+          id="ebay-purchase-price"
+          placeholder="Cena zakupu netto €"
+        />
+
+        <input
+          type="number"
+          class="task-input"
+          id="ebay-weight"
+          placeholder="Waga produktu kg"
+        />
+
+        <select class="task-input" id="ebay-category">
+          <option value="tools">Narzędzia / Werkzeug</option>
+          <option value="auto">Motoryzacja / Auto</option>
+          <option value="workshop">Akcesoria warsztatowe</option>
+          <option value="other">Inna kategoria</option>
+        </select>
+
+        <input
+          type="number"
+          class="task-input"
+          id="ebay-margin"
+          placeholder="Marża %"
+        />
+
+        <button type="button" class="task-button" id="calculate-shipping-button">
+          Oblicz cenę eBay
+        </button>
+
+        <p id="purchase-result">Cena zakupu netto: —</p>
+        <p id="shipping-result">Koszt wysyłki: —</p>
+        <p id="base-result">Koszt bazowy: —</p>
+        <p id="margin-result">Marża: —</p>
+        <p id="category-result">Kategoria eBay: —</p>
+        <p id="fee-result">Prowizja eBay: —</p>
+        <p id="price-result">Sugerowana cena sprzedaży eBay: —</p>
+        <p id="rounded-price-result">Cena do wystawienia: —</p>
+        <p class="calculator-note">Darmowa wysyłka: koszt wysyłki jest wliczony w cenę.</p>
+      </article>
+    </section>
+  `,
 
   Marketing: () => `
     <header class="topbar">
@@ -264,9 +273,10 @@ function renderPage(pageName) {
   if (pageName === 'Zadania') {
     setupTasksPage();
   }
+
   if (pageName === 'eBay Builder') {
-  setupEbayBuilderPage();
-}
+    setupEbayBuilderPage();
+  }
 }
 
 function saveTasks() {
@@ -295,9 +305,9 @@ function setupTasksPage() {
   const taskList = document.querySelector('.task-list');
   const taskPriority = document.querySelector('.task-priority');
 
-if (!taskForm || !taskInput || !taskCategory || !taskPriority || !taskList) {
-  return;
-}
+  if (!taskForm || !taskInput || !taskCategory || !taskPriority || !taskList) {
+    return;
+  }
 
   renderTasks(taskList);
 
@@ -311,12 +321,12 @@ if (!taskForm || !taskInput || !taskCategory || !taskPriority || !taskList) {
     }
 
     const newTask = {
-  id: Date.now(),
-  text: taskText,
-  category: taskCategory.value,
-  priority: taskPriority.value,
-  done: false,
-};
+      id: Date.now(),
+      text: taskText,
+      category: taskCategory.value,
+      priority: taskPriority.value,
+      done: false,
+    };
 
     tasks.push(newTask);
     saveTasks();
@@ -341,9 +351,9 @@ function renderTasks(taskList) {
         <div>
           <strong>${escapeHtml(task.text)}</strong>
           <span>${escapeHtml(task.category)}</span>
-<span class="task-priority-badge ${getPriorityClass(task.priority)}">
-  ${escapeHtml(task.priority || 'Dzisiaj')}
-</span>
+          <span class="task-priority-badge ${getPriorityClass(task.priority)}">
+            ${escapeHtml(task.priority || 'Dzisiaj')}
+          </span>
         </div>
 
         <div class="task-actions">
@@ -394,6 +404,7 @@ function renderTasks(taskList) {
     });
   });
 }
+
 function getPriorityClass(priority) {
   if (priority === 'Wysoki') {
     return 'priority-high';
@@ -410,15 +421,38 @@ function getPriorityClass(priority) {
   return 'priority-today';
 }
 
-function escapeHtml(text) {
-  return String(text)
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-    .replaceAll("'", '&#039;');
-}
 function setupEbayBuilderPage() {
+  setupProductLinkAnalysis();
+  setupEbayPriceCalculator();
+}
+
+function setupProductLinkAnalysis() {
+  const analyzeButton = document.querySelector('#analyze-product-button');
+  const productLinkInput = document.querySelector('#product-link-input');
+  const productLinkResult = document.querySelector('#product-link-result');
+
+  if (!analyzeButton || !productLinkInput || !productLinkResult) {
+    return;
+  }
+
+  analyzeButton.addEventListener('click', () => {
+    const link = productLinkInput.value.trim();
+
+    if (!link) {
+      productLinkResult.textContent = 'Status analizy: wklej link produktu';
+      return;
+    }
+
+    if (!link.includes('piaskraft.com')) {
+      productLinkResult.textContent = 'Status analizy: nie jest to link Piaskraft';
+      return;
+    }
+
+    productLinkResult.textContent = 'Status analizy: link poprawny';
+  });
+}
+
+function setupEbayPriceCalculator() {
   const purchasePriceInput = document.querySelector('#ebay-purchase-price');
   const weightInput = document.querySelector('#ebay-weight');
   const categoryInput = document.querySelector('#ebay-category');
@@ -483,6 +517,7 @@ function setupEbayBuilderPage() {
     roundedPriceResult.textContent = `Cena do wystawienia: ${roundedFinalPrice.toFixed(2)} €`;
   });
 }
+
 function getRoundedEbayPrice(price) {
   const roundedPrice = Math.floor(price) + 0.99;
 
@@ -530,6 +565,15 @@ function getShippingCost(weight) {
   }
 
   return null;
+}
+
+function escapeHtml(text) {
+  return String(text)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#039;');
 }
 
 menuItems.forEach((item) => {
