@@ -2,6 +2,9 @@ const menuItems = document.querySelectorAll('.menu-item');
 const mainContent = document.querySelector('.main');
 
 let tasks = loadTasks();
+let ebayAnalyses = JSON.parse(
+  localStorage.getItem('ebayAnalyses')
+) || [];
 
 const pages = {
   Dashboard: () => `
@@ -211,6 +214,14 @@ const pages = {
         <p id="rounded-price-result">Cena do wystawienia: —</p>
         <p class="calculator-note">Darmowa wysyłka: koszt wysyłki jest wliczony w cenę.</p>
       </article>
+      <article class="card">
+  <p class="card-label">Historia</p>
+  <h3>Ostatnie analizy</h3>
+
+  <ul class="analysis-history-list">
+    <li class="empty-info">Brak zapisanych analiz.</li>
+  </ul>
+</article>
     </section>
   `,
 
@@ -467,11 +478,23 @@ function setupProductLinkAnalysis() {
   category: 'Narzędzia',
   price: '49.99',
 };
+ebayAnalyses.unshift({
+  name: product.name,
+  date: new Date().toLocaleDateString()
+});
+
+localStorage.setItem(
+  'ebayAnalyses',
+  JSON.stringify(ebayAnalyses)
+);
 const weightInput = document.querySelector('#ebay-weight');
 const categoryInput = document.querySelector('#ebay-category');
+const purchasePriceInput = document.querySelector('#ebay-purchase-price');
+
 productLinkResult.textContent = 'Status analizy: link poprawny';
 weightInput.value = product.weight;
 categoryInput.value = 'tools';
+purchasePriceInput.value = product.price;
 
 document.querySelector('#analysis-name').textContent = `Nazwa: ${product.name}`;
 document.querySelector('#analysis-ean').textContent = `EAN: ${product.ean}`;
