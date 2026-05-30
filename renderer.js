@@ -131,6 +131,18 @@ const pages = {
       </article>
 
       <article class="card">
+  <p class="card-label">Wynik analizy</p>
+
+  <h3>Dane produktu</h3>
+
+  <p id="analysis-name">Nazwa: —</p>
+  <p id="analysis-ean">EAN: —</p>
+  <p id="analysis-weight">Waga: —</p>
+  <p id="analysis-category">Kategoria: —</p>
+  <p id="analysis-price">Cena sklepu: —</p>
+</article>
+
+      <article class="card">
         <p class="card-label">Koszty wysyłki</p>
         <h3>Tabela wagowa</h3>
         <p>0–1 kg: 5.20 €</p>
@@ -449,6 +461,21 @@ function setupProductLinkAnalysis() {
     }
 
     productLinkResult.textContent = 'Status analizy: link poprawny';
+
+document.querySelector('#analysis-name').textContent =
+  'Nazwa: Produkt testowy Piaskraft';
+
+document.querySelector('#analysis-ean').textContent =
+  'EAN: 5900000000000';
+
+document.querySelector('#analysis-weight').textContent =
+  'Waga: 2 kg';
+
+document.querySelector('#analysis-category').textContent =
+  'Kategoria: Narzędzia';
+
+document.querySelector('#analysis-price').textContent =
+  'Cena sklepu: 49.99 €';
   });
 }
 
