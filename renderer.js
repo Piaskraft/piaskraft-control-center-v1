@@ -460,22 +460,24 @@ function setupProductLinkAnalysis() {
       return;
     }
 
-    productLinkResult.textContent = 'Status analizy: link poprawny';
+  const product = {
+  name: 'Produkt testowy Piaskraft',
+  ean: '5900000000000',
+  weight: '2',
+  category: 'Narzędzia',
+  price: '49.99',
+};
+const weightInput = document.querySelector('#ebay-weight');
+const categoryInput = document.querySelector('#ebay-category');
+productLinkResult.textContent = 'Status analizy: link poprawny';
+weightInput.value = product.weight;
+categoryInput.value = 'tools';
 
-document.querySelector('#analysis-name').textContent =
-  'Nazwa: Produkt testowy Piaskraft';
-
-document.querySelector('#analysis-ean').textContent =
-  'EAN: 5900000000000';
-
-document.querySelector('#analysis-weight').textContent =
-  'Waga: 2 kg';
-
-document.querySelector('#analysis-category').textContent =
-  'Kategoria: Narzędzia';
-
-document.querySelector('#analysis-price').textContent =
-  'Cena sklepu: 49.99 €';
+document.querySelector('#analysis-name').textContent = `Nazwa: ${product.name}`;
+document.querySelector('#analysis-ean').textContent = `EAN: ${product.ean}`;
+document.querySelector('#analysis-weight').textContent = `Waga: ${product.weight} kg`;
+document.querySelector('#analysis-category').textContent = `Kategoria: ${product.category}`;
+document.querySelector('#analysis-price').textContent = `Cena sklepu: ${product.price} €`;
   });
 }
 
